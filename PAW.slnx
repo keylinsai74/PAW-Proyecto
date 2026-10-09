@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PAW.API/PAW.API.csproj" Id="f69a230d-5b8b-466c-80e3-577b1ed7b789" />
+  <Project Path="PAW.DataAccess/PAW.DataAccess.csproj" Id="ac30c873-800c-4d0a-9bdf-c1074897fefd" />
+  <Project Path="PAW.Models/PAW.Models.csproj" Id="a6b093a6-1c01-43aa-b71c-fe97f631b3d1" />
+  <Project Path="PAW.Web/PAW.Web.csproj" />
+</Solution>

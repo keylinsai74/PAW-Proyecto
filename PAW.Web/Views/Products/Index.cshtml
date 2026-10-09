@@ -1,0 +1,31 @@
+﻿@model List<PAW.Web.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h1>Productos</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Rating</th>
+            <th>Última modificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductId</td>
+                <td>@p.ProductName</td>
+                <td>@p.Description</td>
+                <td>@p.Rating</td>
+                <td>@p.LastModified</td>
+            </tr>
+        }
+    </tbody>
+</table>
