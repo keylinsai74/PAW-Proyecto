@@ -1,25 +1,28 @@
-﻿using PAW.Web.Models;
+﻿using APW.Architecture;
+using PAW.Architecture.Providers;
+using PAW.Models.DTO;
 
-namespace PAW.Web.Services
+namespace PAW.Web.Services;
+
+public interface IProductService
 {
-    public interface IProductService
+    Task<IEnumerable<ProductDTO>> GetProductsAsync();
+}
+
+public class ProductService : ServiceBase, IProductService
+{
+    private const string _path = "Product";
+    private readonly IRestProvider _restProvider;
+
+    public ProductService(IRestProvider restProvider)
     {
-        Task<List<ProductViewModel>> GetProductsAsync();
+        _restProvider = restProvider;
     }
 
-    public class ProductService : IProductService
+    public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
     {
-        private readonly HttpClient _httpClient;
-
-        public ProductService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
-        public async Task<List<ProductViewModel>> GetProductsAsync()
-        {
-            var products = await _httpClient.GetFromJsonAsync<List<ProductViewModel>>("api/Products");
-            return products ?? new List<ProductViewModel>();
-        }
+        var response = await _restProvider.GetAsync(SetPathUrl(_path), id: null);
+        var products = await JsonProvider.DeserializeAsync<IEnumerable<ProductDTO>>(response);
+        return products;
     }
 }
